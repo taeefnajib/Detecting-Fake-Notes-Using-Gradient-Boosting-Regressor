@@ -1,3 +1,5 @@
+from flytekit import Resources, task
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import GradientBoostingClassifier
@@ -40,6 +42,7 @@ def train_model(X_train, y_train, n_estimators, learning_rate, max_depth, random
 
 
 # Running the workflow
+@task(requests=Resources(cpu="2",mem="0.4Gi",storage="0Gi",ephemeral_storage="0Gi"),limits=Resources(cpu="2",mem="0.4Gi",storage="0Gi",ephemeral_storage="0Gi"),retries=3)
 def run_wf(hp: Hyperparameters) -> GradientBoostingClassifier:
     df = create_dataframe(filepath=hp.filepath)
     X_train, X_test, y_train, y_test = split_dataset(df=df, test_size=hp.test_size, random_state=hp.random_state)
