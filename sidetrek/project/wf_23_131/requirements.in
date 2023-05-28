@@ -1,5 +1,0 @@
-pandas
-numpy<1.23.5
-scikit-learn
-dataclasses_json
-joblib

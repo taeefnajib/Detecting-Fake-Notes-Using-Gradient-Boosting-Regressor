@@ -4,3 +4,4 @@ scikit-learn
 dataclasses_json
 joblib
 sidetrek==0.0.85
+sidetrek>=0.0.16

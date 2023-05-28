@@ -1,3 +1,5 @@
+from flytekit import Resources, task
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import GradientBoostingClassifier
@@ -20,6 +22,7 @@ class Hyperparameters(object):
 hp = Hyperparameters()
 
 # Collecting and preparing data
+@task(requests=Resources(cpu="2",mem="1Gi"),limits=Resources(cpu="2",mem="1Gi"),retries=3)
 def create_dataframe(ds: SidetrekDataset) -> pd.DataFrame:
     data = load_dataset(ds=ds, data_type="csv")
     cols = list(data)[0]
@@ -37,6 +40,7 @@ def create_dataframe(ds: SidetrekDataset) -> pd.DataFrame:
 
 
 # Splitting train and test dataset
+@task(requests=Resources(cpu="2",mem="1Gi"),limits=Resources(cpu="2",mem="1Gi"),retries=3)
 def split_dataset(df: pd.DataFrame, hp: Hyperparameters) -> Tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
     X = df.drop(["class"], axis=1)
     y = df["class"]
@@ -44,6 +48,7 @@ def split_dataset(df: pd.DataFrame, hp: Hyperparameters) -> Tuple[pd.DataFrame, 
 
 
 # Building and fitting the model
+@task(requests=Resources(cpu="2",mem="1Gi"),limits=Resources(cpu="2",mem="1Gi"),retries=3)
 def train_model(X_train: pd.DataFrame, y_train: pd.Series, hp: Hyperparameters) -> GradientBoostingClassifier:
     model = GradientBoostingClassifier(n_estimators = hp.n_estimators,
                                      learning_rate= hp.learning_rate,

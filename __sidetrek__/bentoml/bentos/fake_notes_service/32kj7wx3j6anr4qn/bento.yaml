@@ -1,0 +1,48 @@
+service: project.wf_79_445.__bentoml__.service:svc
+name: fake_notes_service
+version: 32kj7wx3j6anr4qn
+bentoml_version: 1.0.15
+creation_time: '2023-05-25T22:59:57.629343+00:00'
+labels:
+  organization: 626e62cb-cf4a-45f6-92fc-c2279a621fce
+  project: 43516af4-f055-4c63-b730-badf3c325afb
+  domain: development
+models:
+- tag: fake_notes_model:sarfi3x3j6uih4qn
+  module: bentoml.sklearn
+  creation_time: '2023-05-25T22:57:45.751754+00:00'
+runners:
+- name: fake_notes_model
+  runnable_type: SklearnRunnable
+  models:
+  - fake_notes_model:sarfi3x3j6uih4qn
+  resource_config: null
+apis:
+- name: classify
+  input_type: NumpyNdarray
+  output_type: NumpyNdarray
+docker:
+  distro: debian
+  python_version: '3.10'
+  cuda_version: null
+  env: null
+  system_packages: null
+  setup_script: null
+  base_image: null
+  dockerfile_template: null
+python:
+  requirements_txt: ./requirements.txt
+  packages: null
+  lock_packages: null
+  index_url: null
+  no_index: null
+  trusted_host: null
+  find_links: null
+  extra_index_url: null
+  pip_args: null
+  wheels: null
+conda:
+  environment_yml: null
+  channels: null
+  dependencies: null
+  pip: null
